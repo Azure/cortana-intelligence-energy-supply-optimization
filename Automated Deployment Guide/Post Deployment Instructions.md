@@ -1,11 +1,11 @@
 # Energy Supply Optimization Solution
 
-This document is focusing on the post deployment instructions for the automated deployment through [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions). The source code of the solution as well as manual deployment instructions can be found [here](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/tree/master/Manual%20Deployment%20Guide).
+This document is focusing on the post deployment instructions for the automated deployment through [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions). The source code of the solution as well as manual deployment instructions can be found [here](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide).
 
 # Architecture
 The architecture diagram shows various Azure services that are deployed by [Energy Supply Optimization Solution]() using [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions), and how they are connected to each other in the end to end solution.
 
-![Solution Diagram](Figures/architecture.png)
+![Solution Diagram](Figures/resourceOptArchitecture.png)
 
 
 1.	The sample data is streamed by newly deployed **Azure Web Jobs**.
