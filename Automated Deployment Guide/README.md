@@ -49,13 +49,16 @@ demand. This solution demonstrates the ability of Azure to accommodating
 external tools, such as [Pyomo](http://www.pyomo.org/) and
 [CBC](https://projects.coin-or.org/Cbc), to solve large-scale numerical
 optimization problems such as mixed integer-linear programming, parallelizing
-multiple optimization tasks over an Azure Batch of Azure Virtual Machines. [RL
-edit ends]
+multiple optimization tasks over an Azure Batch of Azure Virtual Machines. Other
+involved products include Azure Blob Storage, Azure Queue Storage, Azure Web
+App, Azure SQL Database, as well as Power BI.[RL edit ends]
 
 Solution Diagram
 ----------------
 
 ![Solution Diagram](media/4e3773954d0c3e17c508ba09f4639e44.shtml)
+
+Solution Diagram
 
 Solution Diagram
 
