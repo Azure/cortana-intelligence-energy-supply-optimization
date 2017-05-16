@@ -8,17 +8,22 @@ The architecture diagram shows various Azure services that are deployed by [Ener
 ![Solution Diagram](Figures/resourceOptArchitecture.png)
 
 
-1.	The sample data is streamed by newly deployed **Azure Web Jobs**.
+1.  The sample data is streamed by newly deployed **Azure Web Jobs**.
 
-2.	This synthetic data feeds into the **Azure SQL**, that will be used in the rest of the solution flow.
+2.  This synthetic data feeds into the **Azure SQL**, that will be used in the
+    rest of the solution flow.
 
-3.	The **Azure Machine Learning** service is used to optimize the energy supply of particular region given the inputs received.
+3.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply
+    from a particular reource type given the inputs received.
 
-4.	**Azure SQL Database** is used to store the optimization results received from the **Azure Machine Learning** service. These results are then consumed in the **Power BI** dashboard.
+4.  **Azure SQL Database** is used to store the optimization results received
+    from the **Azure Batch** service. These results are then consumed
+    in the **Power BI** dashboard.
 
-5. **Azure Data Factory** handles orchestration, and scheduling of the hourly model retraining.
+5.  **Azure Data Factory** handles orchestration, and scheduling of the hourly
+    model retraining.
 
-6.	Finally, **Power BI** is used for results visualization.
+6.  Finally, **Power BI** is used for results visualization.
 
 All the resources listed above besides Power BI are already deployed in your subscription. The following instructions will guide you on how to monitor things that you have deployed and create visualizations in Power BI.
 
@@ -29,7 +34,7 @@ This will show all the resources under this resource groups on [Azure management
 
 After successful deployment, the entire solution is automatically started on cloud. You can monitor the progress from the following resources.
 
-## **Monitor progress**
+## **Monitor progress** [This section needs a major update]
 
 #### Web Jobs
 6 Azure Web jobs are created during the deployment. You can monitor the web jobs by clicking the link on your deployment page.

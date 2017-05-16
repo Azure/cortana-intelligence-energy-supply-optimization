@@ -1,14 +1,12 @@
-Energy Resource Optimization Solution
-=====================================
+# Energy Resource Optimization Solution
 
 This folder contains the deployment instructions for the Energy Resource
 Optimization solution in the Cortana Intelligence Gallery. To start a new
 solution deployment, visit the gallery page .
 
-Summary
--------
+## Summary
 
-[RL edit begins] In an energy grid,energy consumers are engaged with various
+In an energy grid,energy consumers are engaged with various
 types of energy supplying, trading, and storage components such as substations,
 batteries, windfarms and solar panels, micro-turbines, as well as demand
 response bids, to meet their respective demands and minimize the cost of energy
@@ -23,8 +21,8 @@ energy resources. This solution demonstrates the ability of Cortana Intelligence
 Suite to accommodating external tools, to solve parallelized numerical
 optimization problems over an Azure Batch of Azure Virtual Machines.
 
-Description
------------
+## Description
+
 
 #### Estimated Provisioning Time: 30 Minutes
 
@@ -53,8 +51,7 @@ multiple optimization tasks over an Azure Batch of Azure Virtual Machines. Other
 involved products include Azure Blob Storage, Azure Queue Storage, Azure Web
 App, Azure SQL Database, as well as Power BI.[RL edit ends]
 
-Solution Diagram
-----------------
+## Solution Diagram
 
 ![Solution Diagram](media/4e3773954d0c3e17c508ba09f4639e44.shtml)
 
@@ -62,19 +59,19 @@ Solution Diagram
 
 Solution Diagram
 
-Technical details and workflow
-------------------------------
+## Technical details and workflow
+
 
 1.  The sample data is streamed by newly deployed **Azure Web Jobs**.
 
 2.  This synthetic data feeds into the **Azure SQL**, that will be used in the
     rest of the solution flow.
 
-3.  The **Azure Machine Learning** service is used to optimize the energy supply
-    of particular region given the inputs received.
+3.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply
+    from a particular reource type given the inputs received.
 
 4.  **Azure SQL Database** is used to store the optimization results received
-    from the **Azure Machine Learning** service. These results are then consumed
+    from the **Azure Batch** service. These results are then consumed
     in the **Power BI** dashboard.
 
 5.  **Azure Data Factory** handles orchestration, and scheduling of the hourly
