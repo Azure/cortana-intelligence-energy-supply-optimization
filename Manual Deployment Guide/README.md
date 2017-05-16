@@ -20,7 +20,7 @@ Table of Contents
 Abstract
 --------
 
-[RL edit begins] This solution focuses on resource commitment optimization
+This solution focuses on resource commitment optimization
 within the energy sector. An energy grid consists of energy consumers, as well
 as various types of energy supplying, trading, and storage components:
 Substations accepts power load or exports excessive power; Batteries may
