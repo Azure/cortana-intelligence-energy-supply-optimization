@@ -1,5 +1,4 @@
 # Energy Resource Optimization- A Cortana Intelligence Solution How-To Guide
-==========================================================================
 
 An energy grid consists of energy consumers, as well as various types of energy
 supplying, trading, and storage components: Substations accepts power load or
@@ -36,7 +35,7 @@ Description](https://github.com/Azure/cortana-intelligence-price-optimization/bl
 in the Manual Deployment Guide.
 
 ## Solution Architecture
----------------------
+
 
 In this session, we provide more details about how the above analytical approach
 is operationalized in Cortana Intelligence. The following chart describes the
@@ -48,7 +47,7 @@ Architecture Diagram
 
 Architecture Diagram
 
->>>>>>> 5d7019abc5cf12e30fa29587b2bba7be78b7af73
+
 ### What’s Under the Hood
 
 Simulated demand forecast, price forecast, and specifications of various types
@@ -62,7 +61,7 @@ parallel, and push the results into Azure SQL Database before they shut down.
 The results in the database are visualized by PowerBI.
 
 ## Solution Dashboard
-------------------
+
 
 The snapshot below shows the Power BI dashboard that visualizes the results of
 the energy resource optimization solution.
@@ -83,7 +82,6 @@ well as a comparison of costs between the optimal solution and a baseline
 solution.
 
 ## Getting Started
----------------
 
 This solution template contains materials to help both technical and business
 audiences understand our energy resource optimization solution built on [Cortana
