@@ -1,13 +1,13 @@
 Energy Resource Optimization- A Cortana Intelligence Solution How-To Guide
 ==========================================================================
 
-[RL edit begins]An energy grid consists of energy consumers, as well as various
-types of energy supplying, trading, and storage components: Substations accepts
-power load or exports excessive power; Batteries may discharge energy or store
-it for future use; Windfarms and solar panels (self-scheduled generators),
-micro-turbines (dispatchable generators), and demand response bids can all be
-engaged to satisfying the demand from the consumers within the grid. The costs
-of soliciting different types of resources vary, while the capacities and the
+An energy grid consists of energy consumers, as well as various types of energy
+supplying, trading, and storage components: Substations accepts power load or
+exports excessive power; Batteries may discharge energy or store it for future
+use; Windfarms and solar panels (self-scheduled generators), micro-turbines
+(dispatchable generators), and demand response bids can all be engaged to
+satisfying the demand from the consumers within the grid. The costs of
+soliciting different types of resources vary, while the capacities and the
 physical characteristics of each resource type limits the dispatch of the
 resource. Given all these constraints, a central challenge the smart grid
 operator must face, is how much energy each type of the resources should commit
@@ -33,7 +33,7 @@ opportunities for improved cost for the grid under consideration.
 For a discussion of the analytical approach used in this solution, see the
 [Solution
 Description](https://github.com/Azure/cortana-intelligence-price-optimization/blob/master/Manual%20Deployment%20Guide/Solution%20Description.md)
-in the Manual Deployment Guide. [RL edit finishes]
+in the Manual Deployment Guide.
 
 Solution Architecture
 ---------------------
@@ -46,55 +46,46 @@ solution architecture.
 
 Architecture Diagram
 
+Architecture Diagram
+
 ### What’s Under the Hood
 
-Raw simulated transactional data are pushed into Azure Data Lake Storage, whence
-the Spark Jobs run on HDInsight Cluster will take the raw data as inputs and:
-
-1.  Turn the unstructured raw data into structured data and aggregate the
-    individual transactions into weekly sales data.
-
-2.  Train demand forecasting model on the aggregated sales data.
-
-3.  Run the optimization algorithm and return the optimal prices for all
-    products in all competing groups.
-
-The final results are visualized in Power BI Dashboard. The whole process is
-scheduled weekly, with data movement and scheduling managed by Azure Data
-Factory.
-
-### About Implementation on Spark
-
-A parallel version of the price optimization algorithm is implemented on Spark.
-Utilizing `RDD.map()`, the independent price optimization problems for products
-in different competing group can be solved in parallel, reducing runtime.
+Simulated demand forecast, price forecast, and specifications of various types
+of energy resources are produced hourly and pushed into Azure Blob Storage with
+a message added to Azure Storage Queue. A continuously running Webjob hosted on
+Azure Function monitors the queue. Upon receiving the message, the Webjob
+activates a Azure Batch of Data Science Virtual Machines, each of which obtains
+simulated data from one substation, as well as the PYOMO code and the solver
+pre-stored in Azure Blob Storage. The pool of VMs execute the optimization in
+parallel, and push the results into Azure SQL Database before they shut down.
+The results in the database are visualized by PowerBI.
 
 Solution Dashboard
 ------------------
 
 The snapshot below shows the Power BI dashboard that visualizes the results of
-demand forecasting and price optimization solution.
+the energy resource optimization solution.
 
 ![Dashboard](media/39ecdcf9b2e18f48111182bd4298498d.shtml)
 
 Dashboard
 
-The dashboard contains four parts: 1. **Price Elasticity**: shows the
-relationship between sales and price, and using the filters on the right, you
-can select to view the results for a specific store, department or product. 2.
-**Demand Forecasting**: shows the results and performance of the demand
-forecasting model. 3. **Price Optimization** shows the profit gain realized by
-using the recommended optimal price, as well as corresponding changes in sales
-volume and price that resulted in the profit gain. 4. **Execution Time** shows
-the time decomposition of different computational stages, allowing the user to
-monitor the runtime.
+Dashboard
+
+The dashboard contains two tabs. The first tab shows the inputs to the
+optimization, including load forecast for each substation, price forecasts for
+different types of resources, as well as the wind-farm and solar generation
+forecast. The second tab shows the results of the optimization, including the
+optimal substation load, optimal substation sale, optimal generation for demand
+responses and dispatchables (micro-turbines), battery charge or discharge, as
+well as a comparison of costs between the optimal solution and a baseline
+solution.
 
 Getting Started
 ---------------
 
 This solution template contains materials to help both technical and business
-audiences understand our demand forecasting and price optimization solution
-built on [Cortana
+audiences understand our energy resource optimization solution built on [Cortana
 Intelligence](https://www.microsoft.com/en-us/server-cloud/cortana-intelligence-suite/Overview.aspx).
 
 Business Audiences
