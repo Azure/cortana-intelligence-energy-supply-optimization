@@ -1,155 +1,245 @@
-# Energy Supply Optimization Solution in Cortana Intelligence Suite
+Energy Supply Optimization Solution in Cortana Intelligence Suite
+=================================================================
 
-## Table of Contents  
-- [Abstract](#abstract)  
-- [Requirements](#requirements)
-- [Architecture](#architecture)
-- [Setup Steps](#setup-steps)
-- [Validation and Results](#validation-and-results)
+Table of Contents
+-----------------
 
-## Abstract[RL]
-This solution focuses on demand forecasting within the energy sector. Storing energy is not cost-effective, so utilities and power generators need to forecast future power consumption so that they can efficiently balance the supply with the demand. During peak hours, short supply can result in power outages. Conversely, too much supply can result in waste of resources. Advanced demand forecasting techniques detail hourly demand and peak hours for a particular day, allowing an energy provider to optimize the power generation process. This solution using Cortana Intelligence enables energy companies to quickly introduce powerful forecasting technology into their business.
+-   [Abstract](#abstract)
 
-This solution combines several Azure services to provide powerful advantages. Event Hubs collects real-time consumption data. Stream Analytics aggregates the streaming data and makes it available for visualization. Azure SQL stores and transforms the consumption data. Machine Learning implements and executes the forecasting model. Power BI visualizes the real-time energy consumption as well as the forecast results. Finally, Data Factory orchestrates and schedules the entire data flow.
+-   [Requirements](#requirements)
 
+-   [Architecture](#architecture)
 
-The published [Energy Demand Forecast Solution](https://go.microsoft.com/fwlink/?linkid=831187) provides one-click deployment of an energy demand forecast solution in Cortana Intelligence Suite. Advanced analytics solution implementers, i.e. Data Scientists and Data Engineers, usually need deeper understanding of the template components and architecture in order to use, maintain, and improve the solution. This documentation provides more details of the solution and step-by-step deployment instructions. Going through this manual deployment process will help implementers gain an inside view on how the solution is built and the function of each component.
+-   [Setup Steps](#setup-steps)
 
-## Requirements[PS]
+-   [Validation and Results](#validation-and-results)
+
+Abstract
+--------
+
+[RL edit begins] This solution focuses on resource commitment optimization
+within the energy sector. An energy grid consists of energy consumers, as well
+as various types of energy supplying, trading, and storage components:
+Substations accepts power load or exports excessive power; Batteries may
+discharge energy or store it for future use; Windfarms and solar panels
+(self-scheduled generators), micro-turbines (dispatchable generators), and
+demand response bids can all be engaged to satisfying the demand from the
+consumers. The costs of soliciting different types of resources vary, and the
+capacities and the physical characteristics of each resource type limit the
+dispatch of its resource. Given all these constraints, the smart grid operator
+must determine how much energy each type of the resources should commit over a
+time frame, so that the forecasted energy demand from the grid are satisfied.
+This solution using Cortana Intelligence enables smart grid operators to quickly
+introduce resource commitment optimization technology into their business.
+
+This solution combines several Azure services to provide powerful advantages.
+Upon receiving the demand forecast and specification data for different types of
+resources into a Azure Blob Storage, together with a triggering message in Azure
+Queue Storage, an Azure Web App provisions an Azure Batch of Data Science
+Virtual Machines that perform the numerical optimization problems defined by the
+input data. The results are stored in Azure SQL Database and visualized in Power
+BI.
+
+The published [[Solution]](https://go.microsoft.com/fwlink/?linkid=831187)
+provides one-click deployment of this resource commitment optimization solution
+in Cortana Intelligence Suite. Advanced analytics solution implementers, i.e.
+Data Scientists and Data Engineers, usually need deeper understanding of the
+template components and architecture in order to use, maintain, and improve the
+solution. This documentation provides more details of the solution and
+step-by-step deployment instructions. Going through this manual deployment
+process will help implementers gain an inside view on how the solution is built
+and the function of each component.
+
+Requirements[PS]
+----------------
 
 You will need the following accounts and software to create this solution:
 
-- Source code and instructions from this GitHub repo
+-   Source code and instructions from this GitHub repo
 
-- A [Microsoft Azure subscription](<https://azure.microsoft.com/>)
+-   A [Microsoft Azure subscription](https://azure.microsoft.com/)
 
-- A Microsoft Office 365 subscription for Power BI access
+-   A Microsoft Office 365 subscription for Power BI access
 
-- A network connection
+-   A network connection
 
-- [SQL Server Management Studio](<https://msdn.microsoft.com/en-us/library/mt238290.aspx>), [Visual Studio](<https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx>), or another similar tool to access a SQL server database.
+-   [SQL Server Management
+    Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx), [Visual
+    Studio](https://www.visualstudio.com/en-us/visual-studio-homepage-vs.aspx),
+    or another similar tool to access a SQL server database.
 
-- [Microsoft Azure Storage Explorer](<http://storageexplorer.com/>)
+-   [Microsoft Azure Storage Explorer](http://storageexplorer.com/)
 
-- [Power BI Desktop](<https://powerbi.microsoft.com/en-us/desktop>)
+-   [Power BI Desktop](https://powerbi.microsoft.com/en-us/desktop)
 
-It will take about one day to implement this solution if you have all the required software/resources ready to use. 
+It will take about one day to implement this solution if you have all the
+required software/resources ready to use.
 
-## Architecture
-![](Figures/resourceOptArchitecture.png)
+Architecture
+------------
 
-The figure above shows the overall architecture of the Energy Resource Optimization solution.
+![](media/b436ba5484964a15c120d8cbd5d812a6.png)
 
-- The data is simulated from **Azure Web Jobs** and feeds into the **Azure SQL Database**.
+The figure above shows the overall architecture of the Energy Resource
+Optimization solution.
 
-- **Azure Batch** service is used to optimize the energy supply of particular region given the inputs received.
+-   The data is simulated from **Azure Web Jobs** and feeds into the **Azure SQL
+    Database**.
 
-- **Azure SQL Database** is used to store the prediction results received from the **Azure Machine Learning** service.
+-   **Azure Batch** service is used to optimize the energy supply of particular
+    region given the inputs received.
 
-- Finally, **Power BI** is used for results visualization.
+-   **Azure SQL Database** is used to store the prediction results received from
+    the **Azure Machine Learning** service.
 
-This architecture is an example that demonstrates one way of building energy supply optimization solution in Cortana Intelligence Suite. User can modify the architecture and include other Azure services based on different business needs.
+-   Finally, **Power BI** is used for results visualization.
 
-## Setup Steps
-This section walks the readers through the creation of each of the Cortana Intelligence Suite services in the architecture defined in Figure 1.
-As there are usually many interdependent components in a solution, Azure Resource Manager enables you to group all Azure services in one solution into a [resource group](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#resource-groups). Each component in the resource group is called a resource.
-We want to use a common name for the different services we are creating. The remainder of this document will use the assumption that the base service name is:
+This architecture is an example that demonstrates one way of building energy
+supply optimization solution in Cortana Intelligence Suite. User can modify the
+architecture and include other Azure services based on different business needs.
 
-energyopttemplate\[UI\]\[N\]
+Setup Steps
+-----------
 
-Where \[UI\] is the users initials and N is a random integer that you choose. Characters must be entered in in lowercase. Several services, such as Azure Storage, require a unique name for the storage account across a region and hence this format should provide the user with a unique identifier.
-So for example, Steven X. Smith might use a base service name of *energyopttemplatesxs01*  
+This section walks the readers through the creation of each of the Cortana
+Intelligence Suite services in the architecture defined in Figure 1. As there
+are usually many interdependent components in a solution, Azure Resource Manager
+enables you to group all Azure services in one solution into a [resource
+group](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#resource-groups).
+Each component in the resource group is called a resource. We want to use a
+common name for the different services we are creating. The remainder of this
+document will use the assumption that the base service name is:
 
-**NOTE:** We create most resources in the South Central US region. The resource availability in different regions depends on your subscription. When deploying you own resources, make sure all data storage and compute resources are created in the same region to avoid inter-region data movement. Azure Resource Group don’t have to be in the same region as the other resources. Azure Resource Group is a virtual group that groups all the resources in one solution.
+energyopttemplate[UI][N]
+
+Where [UI] is the users initials and N is a random integer that you choose.
+Characters must be entered in in lowercase. Several services, such as Azure
+Storage, require a unique name for the storage account across a region and hence
+this format should provide the user with a unique identifier. So for example,
+Steven X. Smith might use a base service name of *energyopttemplatesxs01*
+
+**NOTE:** We create most resources in the South Central US region. The resource
+availability in different regions depends on your subscription. When deploying
+you own resources, make sure all data storage and compute resources are created
+in the same region to avoid inter-region data movement. Azure Resource Group
+don’t have to be in the same region as the other resources. Azure Resource Group
+is a virtual group that groups all the resources in one solution.
 
 ### 1. Create a new Azure Resource Group
 
-  - Navigate to ***portal.azure.com*** and log in to your account
+-   Navigate to **portal.azure.com** and log in to your account
 
-  - On the left tab click ***Resource Groups***
+-   On the left tab click **Resource Groups**
 
-  - In the resource groups page that appears, click ***Add***
+-   In the resource groups page that appears, click **Add**
 
-  - Provide a name ***energyopttemplate\_resourcegroup***
+-   Provide a name **energyopttemplate\_resourcegroup**
 
-  - Select a ***location***. Note that resource group is a virtual group that groups all the resources in one solution. The resources don’t have to be in the same location as the resource group itself.
+-   Select a **location**. Note that resource group is a virtual group that
+    groups all the resources in one solution. The resources don’t have to be in
+    the same location as the resource group itself.
 
-  - Click ***Create***
+-   Click **Create**
 
 ### 2. Setup Azure Storage account
 
 An Azure Storage account is used to put the raw data file which are written by Webjobs and read by Azure Batch.
 
-  - Navigate to ***portal.azure.com*** and log in to your account.
+-   Navigate to **portal.azure.com** and log in to your account.
 
-  - On the left tab click ***+ (New) > Storage > Storage Account***
+-   On the left tab click **+ (New) \> Storage \> Storage Account**
 
-  - Set the name to ***energyopttemplate[UI][N]***
+-   Set the name to **energyopttemplate[UI][N]**
 
-  - Change the ***Deployment Model*** to ***Classic***
+-   Change the **Deployment Model** to **Classic**
 
-  - Set the resource group to the resource group we created by selecting the radio button ***Use existing***
+-   Set the resource group to the resource group we created by selecting the
+    radio button **Use existing**
 
-  -  Location set to South Central US
+-   Location set to South Central US
 
-  - Click ***Create***
+-   Click **Create**
 
-  - Wait for the storage account to be created
+-   Wait for the storage account to be created
 
-Now that the storage account has been created we need to collect some information about it for other services like Azure Data Factory.
+Now that the storage account has been created we need to collect some
+information about it for other services like Azure Data Factory.
 
-  - Navigate to ***portal.azure.com*** and log in to your account
+-   Navigate to **portal.azure.com** and log in to your account
 
-  - On the left tab click Resource Groups
+-   On the left tab click Resource Groups
 
-  - Click on the resource group we created earlier ***energyopttemplate_resourcegroup***. If you don’t see the resource group, click ***Refresh***
+-   Click on the resource group we created earlier
+    **energyopttemplate\_resourcegroup**. If you don’t see the resource group,
+    click **Refresh**
 
-  - Click on the storage account in Resources
+-   Click on the storage account in Resources
 
-  - In the Settings tab on the right, click ***Access Keys***
+-   In the Settings tab on the right, click **Access Keys**
 
-  - Copy the PRIMARY CONNECTION STRING and add it to the table below
+-   Copy the PRIMARY CONNECTION STRING and add it to the table below
 
-  - Copy the Primary access key and add it to the table below
+-   Copy the Primary access key and add it to the table below
 
-    | **Azure Storage Account** |                     |
-    |------------------------|---------------------|
-    | Storage Account Name       |energyopttemplate\[UI][N]|
-    | Connection String      |             |
-    | Primary access key     |             ||
+| **Azure Storage Account** |                          |
+|---------------------------|--------------------------|
+| Storage Account Name      | energyopttemplate[UI][N] |
+| Connection String         |                          |
+| Primary access key        |                          |
 
 ### 3. Setup Azure SQL Server and Database
 
+<<<<<<< HEAD
 [Update]
 In this step, we will create three Azure SQL Database to store “actual” demand data generated by the data generator and optimization results. The data in Azure SQL Database are consumed by Power BI to visualize optimize results and performance.
+=======
+In this step, we will create an Azure SQL Database to store “actual” demand data
+generated by the data generator and forecasted demand data generated by Azure
+Machine Learning experiment. The data in Azure SQL Database are consumed by
+Power BI to visualize optimize results and performance.
+>>>>>>> 5d7019abc5cf12e30fa29587b2bba7be78b7af73
 
 #### Create Azure SQL Server and Database
 
-- Navigate to ***portal.azure.com*** and login in to your account
+-   Navigate to **portal.azure.com** and login in to your account
 
-- On the left tab click ***+ (New) > Databases > SQL Database***
+-   On the left tab click **+ (New) \> Databases \> SQL Database**
 
-- Enter the name ***energyopttemplatedb*** for the database name
+-   Enter the name **energyopttemplatedb** for the database name
 
-- Choose the resource group previously created ***energyopttemplate_resourcegroup***
+-   Choose the resource group previously created
+    **energyopttemplate\_resourcegroup**
 
-- Under Server click the arrow and choose ***Create new server***
-    - Name : energyopttemplate\[UI][N]
+-   Under Server click the arrow and choose **Create new server**
 
-    - Enter in an administrator account name and password and save it to the table below.
+    -   Name : energyopttemplate[UI][N]
 
-    - Choose South Central US as the location to keep the SQL database in the same region as the rest of the services.
+    -   Enter in an administrator account name and password and save it to the
+        table below.
 
-    - Click **Select**
+    -   Choose South Central US as the location to keep the SQL database in the
+        same region as the rest of the services.
 
-- Once returned to the SQL Database tab, click ***Create***
+    -   Click **Select**
 
-- Wait for the database and server to be created. This may take few minutes.
+-   Once returned to the SQL Database tab, click **Create**
 
-- From ***portal.azure.com***, click on Resource Groups, then the group for this demo ***energyopttemplate_resourcegroup***.
+-   Wait for the database and server to be created. This may take few minutes.
 
-- In the list of resources, click on the SQL Server that was just created.
+-   From **portal.azure.com**, click on Resource Groups, then the group for this
+    demo **energyopttemplate\_resourcegroup**.
 
+-   In the list of resources, click on the SQL Server that was just created.
+
+-   Under **Settings** for the new server, click **Firewall** and create a rule
+    called **open** with the IP range of 0.0.0.0 to 255.255.255.255. This will
+    allow you to access the database from your desktop. Click **Save.**
+
+-   **Note**: This firewall rule is not recommended for production level systems
+    but for this demo is acceptable. You will want to set this rule to the IP
+    range of your secure system.
+
+<<<<<<< HEAD
 - Create the second database by clicking **New Database** On the right panel top
     - Database name : Dso
     - Server : energyopttemplate\[UI][N]
