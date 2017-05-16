@@ -88,7 +88,6 @@ audiences understand our energy resource optimization solution built on [Cortana
 Intelligence](https://www.microsoft.com/en-us/server-cloud/cortana-intelligence-suite/Overview.aspx).
 
 ## Business Audiences
-------------------
 
 In this repository you will find a folder labeled [Solution Overview for
 Business
@@ -100,7 +99,7 @@ For more information on how to tailor Cortana Intelligence to your needs,
 [connect with one of our partners](http://aka.ms/CISFindPartner).
 
 ## Technical Audiences
--------------------
+
 
 See the [Manual Deployment
 Guide](https://github.com/Azure/cortana-intelligence-price-optimization/blob/master/Manual%20Deployment%20Guide)
