@@ -397,18 +397,26 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Click ***Save*** on top of the page to save the settings
 
-#### 6) Upload Data Generator Web Job
+#### 6) Upload Web Job
 [RL:- Add description of two Data Generator]
 
 
 - Once you return to the App Service tab save, click on ***WebJobs*** under ***Settings***.
 
-##### 1) Add ExecuteSqlQuery Web Job
-- Click ***Add*** on top to upload the PastData job zip and provide following details:
+##### 1) Add CreateBlobUploadData Web Job
+
+- This web job created blob containers **batchappfiles,  batchdatafiles, incomingdatafiles** and a storage queue **incomingmessages**. It also loads the optimizer code to **batchappfiles** which is then used by AzureBatchWebJob while performing the optimization. 
+
+    - **incomingdatafiles** container contains the raw data which is uploaded to here by EnergyResourceDataSimulator. 
+    - EnergyResourceDataSimulator also writes a message to queue **incomingmessages** to let AzureBatchWebJob know about the availability of raw data . 
+    - **batchappfiles** stores the optimizer code and dependent files. 
+    - AzureBatchWebJob moves the raw data from incomingdatafiles container to **batchdatafiles** and then initiates Azure batch which uses raw data for optimization.
+
+- Click ***Add*** on top to upload the CreateBlobUploadData job zip and provide following details:
 
      - Name : ExecuteSqlQuery
 
-      - File Upload : browse to the directory where you downloaded the resource. Go to [*Data Generator*](Data Generator/) and select ***ExecuteSqlQuery.zip***.
+      - File Upload : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***CreateBlobUploadData.zip***.
 
       - Type : Triggered
 
@@ -416,18 +424,41 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
       - Click ***Ok***
 
-- Wait till the web job is added, then click refresh
+- Wait till the web job is added, then click refresh.
 
-- Once you see the web job ***ExecuteSqlQuery*** in the list, select it and click ***Run*** on the top of that tab
+- Once you see the web job ***CreateBlobUploadData*** in the list, select it and click ***Run*** on the top of that tab.
 
-- Wait till the STATUS changes to Completed
+- Wait till the STATUS changes to Completed.
 
-##### 2) Add EnergyOptSimulateHourly Web Job
+##### 2) Add installpkgs Web Job
+
+- This web job installs necessary python packages on the web app server to run the AzureBatchWebJob.
+
+- Click ***Add*** on top to upload the installpkgs job zip and provide following details:
+
+     - Name : installpkgs
+
+      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***installpkgs.zip***.
+
+      - Type : Triggered
+
+      - Triggers : Manual
+
+      - Click ***Ok***
+
+- Wait till the web job is added, then click refresh.
+
+- Once you see the web job ***installpkgs*** in the list, select it and click ***Run*** on the top of that tab.
+
+- Wait till the STATUS changes to Completed.
+
+##### 3) Add EnergyResourceDataSimulator Web Job
+- This web job simulates the data and stores it to incomingdatafiles container. It also writes a message in the incommingmessage queue. It uses tables in database Dso and MarketPlace to generate the rawdata
 - Click ***Add*** on top to upload the Energy data generator job zip and provide following details:
 
-     - Name : EnergyOptSimulateHourly
+     - Name : EnergyResourceDataSimulator
 
-      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*Data Generator*](Data Generator/) and select ***energyopt_simulate_hourly.zip***
+      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***EnergyResourceDataSimulator.zip***.
 
       - Type : Triggered
 
@@ -435,9 +466,29 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
       - Click ***Ok***
 
-- Wait till the web job is added, then click refresh
+- Wait till the web job is added, then click refresh.
 
-- Once you see the web job ***EnergyOptSimulateHourly*** in the list, select it and click ***Run*** on the top of that tab
+- Once you see the web job ***EnergyResourceDataSimulator*** in the list, select it and click ***Run*** on the top of that tab.
+
+- Wait till the STATUS changes to Completed.
+
+
+##### 2) Add AzureBatchWebJob Web Job
+- Click ***Add*** on top to upload the AzureBatchWebJob job zip and provide following details:
+
+     - Name : AzureBatchWebJob
+
+      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***AzureBatchWebJob.zip***.
+
+      - Type : Continuous
+
+      - Scale : Single Instance
+
+      - Click ***Ok***
+
+- Wait till the web job is added, then click refresh.
+
+- Once you see the web job ***AzureBatchWebJob*** in the list, it will start running and the status will change to Running.
 
 - Wait till the STATUS changes to Completed
 
