@@ -25,7 +25,7 @@ Simulated demand forecast, price forecast, and specifications of various typesof
 The snapshot below shows the Power BI dashboard that visualizes the results of
 the energy resource optimization solution.
 
-![Dashboard](Manual%20Deployment%20Guide/Figures/PowerBI-8.png)
+![Dashboard](Manual%20Deployment%20Guide/Figures/PowerBI-11.png)
 
 
 The dashboard contains two tabs. The first tab shows the inputs to the optimization, including load forecast for each substation, price forecasts for different types of resources, as well as the wind-farm and solar generation forecast. The second tab shows the results of the optimization, including the optimal substation load, optimal substation sale, optimal generation for demand responses and dispatchables (micro-turbines), battery charge or discharge, as well as a comparison of costs between the optimal solution and a baseline
