@@ -6,14 +6,14 @@ This solution shows how to create an Azure-based smart solution, leveraging exte
 
 The process described above is operationalized and deployed in the Cortana Intelligence Suite. This solution will enable companies to ingest resource specification data and predicted future demand, and obtain optimal resource commitment recommendations on a regular basis. As a result, the solution drives opportunities for improved cost for the grid under consideration.
 
-For a discussion of the analytical approach used in this solution, see the [Solution Description](/Automated Deployment Guide/SolutionDescription.md) in the Manual Deployment Guide.
+For a discussion of the analytical approach used in this solution, see the [Solution Description](Automate%20Deployment%20 Guide/SolutionDescription.md) in the Manual Deployment Guide.
 
 ## Solution Architecture
 
 
 In this session, we provide more details about how the above analytical approach is operationalized in Cortana Intelligence. The following chart describes the solution architecture.
 
-![Architecture Diagram](Manual_Deployment_Guide/Figures/resourceOptArchitecture.png)
+![Architecture Diagram](Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
 
 ### What’s Under the Hood
