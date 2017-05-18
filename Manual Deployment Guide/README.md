@@ -329,10 +329,8 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 - Click ***Save*** on top of the page to save the settings
 
 #### 6) Upload Web Job
-[RL:- Add description of two Data Generator]
 
-
-- Once you return to the App Service tab save, click on ***WebJobs*** under ***Settings***.
+- Once you return to the App Service tab, click on ***WebJobs*** under ***Settings***.
 
 ##### 1) Add CreateBlobUploadData Web Job
 
