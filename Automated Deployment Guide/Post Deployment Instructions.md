@@ -1,27 +1,25 @@
-# Energy Supply Optimization Solution
+# Resource Optimization Solution
 
 This document is focusing on the post deployment instructions for the automated deployment through [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions). The source code of the solution as well as manual deployment instructions can be found [here](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide).
 
 # Architecture
-The architecture diagram shows various Azure services that are deployed by [Energy Supply Optimization Solution]() using [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions), and how they are connected to each other in the end to end solution.
+The architecture diagram shows various Azure services that are deployed by [Resource Optimization Solution]() using [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions), and how they are connected to each other in the end to end solution.
 
-![Solution Diagram](Figures/resourceOptArchitecture.png)
+![Solution Diagram](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
+</Guide>
 
-1.  The sample data is streamed by newly deployed **Azure Web Jobs**.
+## Technical details and workflow
 
-2.  This synthetic data feeds into the **Azure SQL**, that will be used in the
-    rest of the solution flow.
+1.  The sample data is streamed by newly deployed **Azure Web Jobs**. The web job uses resource related data from Azure SQL to generate the simulated data.
 
-3.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply
-    from a particular reource type given the inputs received.
+2.  This simulated data feeds into the **Azure Storage** and writes message in storage queue, that will be used in the rest of the solution flow.
 
-4.  **Azure SQL Database** is used to store the optimization results received
-    from the **Azure Batch** service. These results are then consumed
-    in the **Power BI** dashboard.
+3.  Another **Web Job** monitors the storage queue and initiate an Azure Bacth job once message in queue is available.
 
-5.  **Azure Data Factory** handles orchestration, and scheduling of the hourly
-    model retraining.
+4.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular resource type given the inputs received.
+
+4.  **Azure SQL Database** is used to store the optimization results received from the **Azure Batch** service. These results are then consumed in the **Power BI** dashboard.
 
 6.  Finally, **Power BI** is used for results visualization.
 
@@ -36,15 +34,15 @@ After successful deployment, the entire solution is automatically started on clo
 
 ## **Monitor progress** [This section needs a major update]
 
-#### Web Jobs
-6 Azure Web jobs are created during the deployment. You can monitor the web jobs by clicking the link on your deployment page.
+#### Web Jobs/Functions
+3 Azure Web jobs are created during the deployment. You can monitor the web jobs by clicking the link on your deployment page.
 * One-time running web jobs are used to start certain Azure services.
-  * CreateTablesInDB: Create required tables in Azure SQL.
-  * GalleryToMLSvc: Creates energy supply optimization ML experiment and publish it as ML WebService.
-  * StartPipelines: Starts the Azure Data Factory pipelines.
+  * installpkgs: Installs necessary python packages on the web app server to run the AzureBatchWebJob.
+  * PopulateStorageContainer: Create Storage containers and queue. Upload necessary files to the storage container.
+  * ExecuteSqlQuery: Creates tables in the three SQL Database.
 * Continuous running web jobs are used as data generator.
-  * EnergyOptSimulateHourly: [RL].
-  * EnergyOptSimulateDaily: [RL].
+  * EnergyResourceDataSimulator: Generates the simulated data and writes it to storage container along with a message in storage queue.
+
 
 #### Azure Data Factory
 

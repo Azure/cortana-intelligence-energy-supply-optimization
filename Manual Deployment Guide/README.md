@@ -13,19 +13,19 @@
 
 -   [Validation and Results](#validation-and-results)
 
--   [Customizing the Solution to Your Own Problem] (#customization)
+-   [Customizing the Solution to Your Own Problem] (#customizing-the-Solution-to-Your-Own-Problem)
 
 
 ## Abstract
 
 This solution focuses on resource commitment optimization within the energy sector. An energy grid consists of energy consumers, as well as various types of energy supplying, trading, and storage components: Substations accepts power load or exports excessive power; Batteries may discharge energy or store it for future use; Windfarms and solar panels (self-scheduled generators), micro-turbines (dispatchable generators), and demand response bids can all be engaged to satisfying the demand from the consumers. The costs of soliciting different types of resources vary, and the capacities and the physical characteristics of each resource type limit the dispatch of its resource. Given all these constraints, the smart grid operator
-must determine how much energy each type of the resources should commit over a time frame, so that the forecasted energy demand from the grid are satisfied.This solution using Cortana Intelligence enables smart grid operators to quickly introduce resource commitment optimization technology into their business.
+must determine how much energy each type of the resources should commit over a time frame, so that the forecasted energy demand from the grid are satisfied. This solution using Cortana Intelligence enables smart grid operators to quickly introduce resource commitment optimization technology into their business.
 
 This solution combines several Azure services to provide powerful advantages. Upon receiving the demand forecast and specification data for different types of resources into a Azure Blob Storage, together with a triggering message in Azure Queue Storage, an Azure Web App provisions an Azure Batch of Data Science Virtual Machines that perform the numerical optimization problems defined by the input data. The results are stored in Azure SQL Database and visualized in PowerBI.
 
 The published [[Solution]](https://go.microsoft.com/fwlink/?linkid=831187) provides one-click deployment of this resource commitment optimization solution in Cortana Intelligence Suite. Advanced analytics solution implementers, i.e. Data Scientists and Data Engineers, usually need deeper understanding of the template components and architecture in order to use, maintain, and improve the solution. This documentation provides more details of the solution and step-by-step deployment instructions. Going through this manual deployment process will help implementers gain an inside view on how the solution is built and the function of each component.
 
-## Requirements[PS]
+## Requirements
 
 You will need the following accounts and software to create this solution:
 
@@ -57,7 +57,7 @@ The figure above shows the overall architecture of the Energy Resource Optimizat
 -  This synthetic data feeds into the **Azure SQL**, that will be used in the
     rest of the solution flow.
 
--  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular reource type given the inputs received.
+-  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular resource type given the inputs received.
 
 -  **Azure SQL Database** is used to store the optimization results received from the **Azure Batch** service. These results are then consumed in the **Power BI** dashboard.
 
@@ -67,7 +67,7 @@ The figure above shows the overall architecture of the Energy Resource Optimizat
 
 This architecture is an example that demonstrates one way of building energysupply optimization solution in Cortana Intelligence Suite. User can modify the architecture and include other Azure services based on different business needs.
 
-Setup Steps [This part needs a major update]
+## Setup Steps
 
 This section walks the readers through the creation of each of the Cortana Intelligence Suite services in the architecture defined in Figure 1. As there are usually many interdependent components in a solution, Azure Resource Manager enables you to group all Azure services in one solution into a [resource group](https://azure.microsoft.com/en-us/documentation/articles/resource-group-overview/#resource-groups). Each component in the resource group is called a resource. We want to use a common name for the different services we are creating. The remainder of this document will use the assumption that the base service name is:
 
@@ -217,7 +217,7 @@ energyopttemplate\[UI][N].database.windows.net,1433
 
 
 ### 4. Create a Batch account 
-Azure Batch is a platform service for running large-scale parallel and high-performance computing (HPC) applications efficiently in the cloud. In this solution we will use Azure Batch to run the optimization model.
+Azure Batch is a platform service for running large-scale parallel and high-performance computing (HPC) applications efficiently in the cloud. In this solution, we will use Azure Batch to run the optimization model.
 
 - Navigate to ***portal.azure.com*** and login in to your account
 
@@ -369,7 +369,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
      - Name : installpkgs
 
-      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***installpkgs.zip***.
+      - File Upload : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***installpkgs.zip***.
 
       - Type : Triggered
 
@@ -389,7 +389,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
      - Name : EnergyResourceDataSimulator
 
-      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***EnergyResourceDataSimulator.zip***.
+      - File Upload : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***EnergyResourceDataSimulator.zip***.
 
       - Type : Triggered
 
@@ -410,7 +410,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
      - Name : AzureBatchWebJob
 
-      - File Uplaod : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***AzureBatchWebJob.zip***.
+      - File Upload : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***AzureBatchWebJob.zip***.
 
       - Type : Continuous
 
@@ -431,7 +431,7 @@ The essential goal of this part is to get the optimization results and visualize
 
 #### 1) Get the database credentials.
 
-  You can get your database credentials from step 3 when you setting up the SQL database.
+  You can get your database credentials from step 3 when you are setting up the SQL database.
 
 #### 2)	Update the data source of the Power BI file
 
@@ -463,6 +463,7 @@ The essential goal of this part is to get the optimization results and visualize
 
       ![DashboardExample](Figures/PowerBI-11.png)
 
+## Validation and Results
 
 ### Check Data in SQL Database
 - Launch [SQL Server Management Studio](https://msdn.microsoft.com/en-us/library/mt238290.aspx)(SSMS), Visual Studio, or a similar tool, and connect to the database with the information you recorded in the table below.
@@ -485,9 +486,9 @@ In order for your own mathematical problem  to be built as a solution pipeline l
 
 ### Bring your own data
 
-To allow your own data to fit into this architecture, note that you simply need to ingest your data file(s) into the Azure Blob container "incomingdatafiles", together with a text message placed into the Azure Storage Queue "incomingmessages". They will automatically trigger the remaining components of the processing pipeline, and will be removed from the container and queue after the optimiztion job is finished. Given the time for the Azure Batch to provision the pool, configure the nodes, run the jobs, and destroy the pool, we recommend that the interval between two consecutive submissions to the container and queue is set to more than one hour. You may submit multiple files, each describing a complete set of data required for one optimizaiton problem, and Azure Batch will assign each file to a separate node that will execute the job in parallel with other nodes handling other files.
+To allow your own data to fit into this architecture, note that you simply need to ingest your data file(s) into the Azure Blob container "incomingdatafiles", together with a text message placed into the Azure Storage Queue "incomingmessages". They will automatically trigger the remaining components of the processing pipeline, and will be removed from the container and queue after the optimization job is finished. Given the time for the Azure Batch to provision the pool, configure the nodes, run the jobs, and destroy the pool, we recommend that the interval between two consecutive submissions to the container and queue is set to more than one hour. You may submit multiple files, each describing a complete set of data required for one optimization problem, and Azure Batch will assign each file to a separate node that will execute the job in parallel with other nodes handling other files.
 
-In the piepline you obtain from the automatic deployment, the data files and messages are simulated from webjob as defined by EnergyResourceDataSimulator.zip, together with two auxiliary databases "Dso" and "MarketPlace". Replace them with your own data source that may involve components other than webjob or database.
+In the pipeline you obtain from the automatic deployment, the data files and messages are simulated from webjob as defined by EnergyResourceDataSimulator.zip, together with two auxiliary databases "Dso" and "MarketPlace". Replace them with your own data source that may involve components other than webjob or database.
 
 ### Bring our own optimization suite
 
@@ -495,5 +496,5 @@ Your optimization suite should include code that describes the optimization prob
 
 The container also contains a congifuration file "modelConfig.txt" that provide additional parameters or specifications of the optimization job, and you should feel free to replace it by something defined by your own problem, or discard it if it is unnecessary. 
 
-The webjob as defined by "AzureBatchWebJob.zip" is the central controller: It spins up the batch pool, sets up the nodes, submits jobs to the nodes, and writes the results to SQL database. After you have customized the optimization suite, make changes to appropriate lines in the main procedure "webjob_trigger.py", so that the code correctly copies the materials from "batchappfiles" to the nodes, properly prepares the nodes, and succesfully submits the jobs.
+The webjob as defined by "AzureBatchWebJob.zip" is the central controller: It spins up the batch pool, sets up the nodes, submits jobs to the nodes, and writes the results to SQL database. After you have customized the optimization suite, make changes to appropriate lines in the main procedure "webjob_trigger.py", so that the code correctly copies the materials from "batchappfiles" to the nodes, properly prepares the nodes, and successfully submits the jobs.
 
