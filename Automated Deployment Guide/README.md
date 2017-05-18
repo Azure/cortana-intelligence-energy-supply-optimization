@@ -28,27 +28,21 @@ This solution provides an Azure-based smart solution, leveraging external open-s
 
 ## Solution Diagram
 
-![Solution Diagram](media/4e3773954d0c3e17c508ba09f4639e44.shtml)
+![Solution Diagram](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
 </Guide>
 
 ## Technical details and workflow
 
+1.  The sample data is streamed by newly deployed **Azure Web Jobs**. The web job uses resource related data from Azure SQL to generate the simulated data.
 
-1.  The sample data is streamed by newly deployed **Azure Web Jobs**.
+2.  This simulated data feeds into the **Azure Storage** and writes message in storage queue, that will be used in the rest of the solution flow.
 
-2.  This synthetic data feeds into the **Azure SQL**, that will be used in the
-    rest of the solution flow.
+3.  Another **Web Job** monitors the storage queue and initiate an Azure Bacth job once message in queue is available.
 
-3.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply
-    from a particular reource type given the inputs received.
+4.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular reource type given the inputs received.
 
-4.  **Azure SQL Database** is used to store the optimization results received
-    from the **Azure Batch** service. These results are then consumed
-    in the **Power BI** dashboard.
-
-5.  **Azure Data Factory** handles orchestration, and scheduling of the hourly
-    model retraining.
+4.  **Azure SQL Database** is used to store the optimization results received from the **Azure Batch** service. These results are then consumed in the **Power BI** dashboard.
 
 6.  Finally, **Power BI** is used for results visualization.
 
