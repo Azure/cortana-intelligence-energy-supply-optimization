@@ -13,7 +13,7 @@
 
 -   [Validation and Results](#validation-and-results)
 
--   [Customizing the Solution to Your Own Problem](#customizing-the-Solution-to-Your-Own-Problem)
+-   [Customizing the Solution to Your Own Problem](customizing-the-solution-to-your-own-problem)
 
 
 ## Abstract
