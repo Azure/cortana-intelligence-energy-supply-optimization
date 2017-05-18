@@ -6,7 +6,7 @@ This solution shows how to create an Azure-based smart solution, leveraging exte
 
 The process described above is operationalized and deployed in the Cortana Intelligence Suite. This solution will enable companies to ingest resource specification data and predicted future demand, and obtain optimal resource commitment recommendations on a regular basis. As a result, the solution drives opportunities for improved cost for the grid under consideration.
 
-For a discussion of the analytical approach used in this solution, see the [Solution Description](Automate%20Deployment%20 Guide/SolutionDescription.md) in the Manual Deployment Guide.
+For a discussion of the analytical approach used in this solution, see the [Solution Description](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Automated%20Deployment%20Guide/Solution%20Description.md) in the Manual Deployment Guide.
 
 ## Solution Architecture
 
@@ -25,16 +25,10 @@ Simulated demand forecast, price forecast, and specifications of various typesof
 The snapshot below shows the Power BI dashboard that visualizes the results of
 the energy resource optimization solution.
 
-![Dashboard](Manual Deployment Guide/Figures/PowerBI-8.png)
+![Dashboard](Manual%20Deployment%20Guide/Figures/PowerBI-8.png)
 
 
-The dashboard contains two tabs. The first tab shows the inputs to the
-optimization, including load forecast for each substation, price forecasts for
-different types of resources, as well as the wind-farm and solar generation
-forecast. The second tab shows the results of the optimization, including the
-optimal substation load, optimal substation sale, optimal generation for demand
-responses and dispatchables (micro-turbines), battery charge or discharge, as
-well as a comparison of costs between the optimal solution and a baseline
+The dashboard contains two tabs. The first tab shows the inputs to the optimization, including load forecast for each substation, price forecasts for different types of resources, as well as the wind-farm and solar generation forecast. The second tab shows the results of the optimization, including the optimal substation load, optimal substation sale, optimal generation for demand responses and dispatchables (micro-turbines), battery charge or discharge, as well as a comparison of costs between the optimal solution and a baseline
 solution.
 
 ## Getting Started
@@ -43,7 +37,7 @@ This solution template contains materials to help both technical and business au
 
 ## Business Audiences
 
-In this repository you will find a folder labeled [Solution Overview for Business Audiences](Solution Overview for Business Audiences).
+In this repository you will find a folder labeled [Solution Overview for Business Audiences](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Solution%20Overview%20for%20Business%20Audiences).
 This folder contains: - Walking Deck: In-depth exploration of the solution for business audiences
 
 For more information on how to tailor Cortana Intelligence to your needs, [connect with one of our partners](http://aka.ms/CISFindPartner).
@@ -51,4 +45,4 @@ For more information on how to tailor Cortana Intelligence to your needs, [conne
 ## Technical Audiences
 
 
-See the [Manual Deployment Guide](Manual Deployment Guide) folder for a full set of instructions on how to deploy the end-to-end pipeline, including a step-by-step walkthrough and files containing all the scripts that you’ll need to deploy resources. **For technical problems or questions about deploying this solution, please post in the issues tab of the repository.**
+See the [Manual Deployment Guide](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide) folder for a full set of instructions on how to deploy the end-to-end pipeline, including a step-by-step walkthrough and files containing all the scripts that you’ll need to deploy resources. **For technical problems or questions about deploying this solution, please post in the issues tab of the repository.**
