@@ -30,7 +30,7 @@ This solution provides an Azure-based smart solution, leveraging external open-s
 
 ![Solution Diagram](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
-</Guide>
+
 
 ## Technical details and workflow
 
@@ -45,7 +45,7 @@ This solution provides an Azure-based smart solution, leveraging external open-s
 4.  **Azure SQL Database** is used to store the optimization results received from the **Azure Batch** service. These results are then consumed in the **Power BI** dashboard.
 
 6.  Finally, **Power BI** is used for results visualization.
-
+</Guide>
 #### Disclaimer
 
 ©2017 Microsoft Corporation. All rights reserved. This information is provided "as-is" and may change without notice. Microsoft makes no warranties, express or implied, with respect to the information provided here. Third party data was used to generate the solution. You are responsible for respecting the rights of others, including procuring and complying with relevant licenses in order to create similar datasets.
