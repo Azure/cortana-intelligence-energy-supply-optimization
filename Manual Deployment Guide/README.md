@@ -448,7 +448,7 @@ The essential goal of this part is to get the optimization results and visualize
 
   - Now the dashboard is updated to connect to your database. In the backend, model is scheduled to be refreshed every 1 hour. You can click **'Refresh'** button on the top to get the latest visualization as time moving forward.
 
-#### 3) [Optional] Publish the dashboard to [Power BIonline](http://www.powerbi.com/)
+#### 3) [Optional] Publish the dashboard to [Power BI Online](http://www.powerbi.com/)
   Note that this step needs a Power BI account (or Office 365 account).
   - Click **"Publish"** on the top panel. Choose **'My Workspace'** and few seconds later a window appears displaying "Publishing succeeded".
 
