@@ -324,8 +324,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
         | StorageConnectionString         |\<Connection String from step 2> |
         | DataSimulator_Interval         |1 |
 	| SCM_COMMAND_IDLE_TIMEOUT        |5400 |
-	| WEBJOBS_IDLE_TIMEOUT         |5400 |
-
+	| WEBJOBS_IDLE_TIMEOUT         |5400 ||
 
 - Click ***Save*** on top of the page to save the settings
 
