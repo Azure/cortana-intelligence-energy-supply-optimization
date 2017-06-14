@@ -185,7 +185,6 @@ In this step, we will create an Azure SQL Database to store “actual” demand 
     - Server : energyopttemplate\[UI][N]
     - Click **OK**
 
-- Under ***Settings*** for the new server, click ***Firewall*** and create a rule called ***open*** with the IP range of 0.0.0.0 to 255.255.255.255. This will allow you to access the database from your desktop. Click ***Save.***
 -	Launch ***SQL Server Management Studio(SSMS)***, or a similar tool, and connect to the database with the information you recorded in the table below.
 	-	NOTE: The server name in most tools will require the full name:                             
 energyopttemplate\[UI][N].database.windows.net,1433
