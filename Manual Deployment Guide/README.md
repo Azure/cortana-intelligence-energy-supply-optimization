@@ -306,6 +306,8 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
         | **Azure App Service Settings** |             |
         |------------------------|---------------------|
         | Key                    | Value               |
+	| SCM_COMMAND_IDLE_TIMEOUT        |5400 |
+	| WEBJOBS_IDLE_TIMEOUT         |5400 |
         | DB_SVR             |energyopttemplate[UI][N].database.windows.net|
         | DB_NAME           |energyopttemplatedb     |
         | DB_DSO         |Dso |
@@ -323,8 +325,6 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
         | INCOMING_DATA         |incomingdatafiles |
         | StorageConnectionString         |\<Connection String from step 2> |
         | DataSimulator_Interval         |1 |
-	| SCM_COMMAND_IDLE_TIMEOUT        |5400 |
-	| WEBJOBS_IDLE_TIMEOUT         |5400 ||
 
 - Click ***Save*** on top of the page to save the settings
 
