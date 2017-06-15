@@ -101,7 +101,7 @@ An Azure Storage account is used to put the raw data file which are written by W
 
 -   Set the name to **energyopttemplate[UI][N]**
 
--   Change the **Deployment Model** to **Classic**
+-   Change the **Deployment Model** to **Resource manager**
 
 -   Set the resource group to the resource group we created by selecting the radio button **Use existing**
 
@@ -306,8 +306,8 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
         | **Azure App Service Settings** |             |
         |------------------------|---------------------|
         | Key                    | Value               |
-	| SCM_COMMAND_IDLE_TIMEOUT        |5400 |
-	| WEBJOBS_IDLE_TIMEOUT         |5400 |
+	    | SCM_COMMAND_IDLE_TIMEOUT        |5400 |
+	    | WEBJOBS_IDLE_TIMEOUT         |5400 |
         | DB_SVR             |energyopttemplate[UI][N].database.windows.net|
         | DB_NAME           |energyopttemplatedb     |
         | DB_DSO         |Dso |
@@ -328,7 +328,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Click ***Save*** on top of the page to save the settings
 
-#### 6) Upload Web Job
+### 6. Upload Web Job
 
 - Once you return to the App Service tab, click on ***WebJobs*** under ***Settings***.
 
@@ -343,7 +343,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Click ***Add*** on top to upload the CreateBlobUploadData job zip and provide following details:
 
-     - Name : ExecuteSqlQuery
+     - Name : CreateBlobUploadData
 
       - File Upload : browse to the directory where you downloaded the resource. Go to [*WebJobs*](WebJobs/) and select ***CreateBlobUploadData.zip***.
 
