@@ -15,7 +15,7 @@ The architecture diagram shows various Azure services that are deployed by [Reso
 
 2.  This simulated data feeds into the **Azure Storage** and writes message in storage queue, that will be used in the rest of the solution flow.
 
-3.  Another **Web Job** monitors the storage queue and initiate an Azure Bacth job once message in queue is available.
+3.  Another **Web Job** monitors the storage queue and initiate an Azure Batch job once message in queue is available.
 
 4.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular resource type given the inputs received.
 
@@ -23,7 +23,7 @@ The architecture diagram shows various Azure services that are deployed by [Reso
 
 6.  Finally, **Power BI** is used for results visualization.
 
-All the resources listed above besides Power BI are already deployed in your subscription. The following instructions will guide you on how to monitor things that you have deployed and create visualizations in Power BI.
+All the resources listed above are already deployed in your subscription. The following instructions will guide you on how to monitor things that you have deployed and create visualizations in Power BI.
 
 # Post Deployment Instructions
 Once the solution is deployed to the subscription, you can see the services deployed by clicking the resource group name on the final deployment screen in the CIS.
@@ -37,12 +37,14 @@ After successful deployment, the entire solution is automatically started on clo
 #### Web Jobs/Functions
 3 Azure Web jobs are created during the deployment. You can monitor the web jobs by clicking the link on your deployment page.
 * One-time running web jobs are used to start certain Azure services.
-  * installpkgs: Installs necessary python packages on the web app server to run the AzureBatchWebJob.
-  * PopulateStorageContainer: Create Storage containers and queue. Upload necessary files to the storage container.
-  * ExecuteSqlQuery: Creates tables in the three SQL Database.
+  * PopulateStorageContainer: This function is used to upload all the Spark Job files to Azure Blob Storage.
+  * ExecuteSqlQuery: This function helps create required tables in Azure SQL Database.
+  * installpkgs: This webjob installs necessary python packages on the web app server to run the AzureBatchWebJob.
+  * CiqsHelpers, pbjs, pbiweb, uploadPbix: These are the helper functions which are mostly used to deploy the Power BI, upload the dashboard and establish the Power BI connection with SQL Server.
+
 * Continuous running web jobs are used as data generator.
-  * EnergyResourceDataSimulator: Generates the simulated data and writes it to storage container along with a message in storage queue.
-  * AzureBatchWebJob: This web job monitors the incommingmessage queue and once it finds messages in the queue, it moves the raw data  from incommingdatafiles to batchdatafiles, creates Azure Batch and submits job to the Azure batch cluster. The job runs optimization code on batch nodes and it writes the result back to the SQL Database energyopttemplatedb.
+ * EnergyResourceDataSimulator : This is a webjob which runs on Function App Server and writes the rawdata into incommingdatafiles blob container and a message in the incommingmessage queue. 
+  * derciqs02: This webjob monitors the incommingmessage queue and once it finds messages in the queue, it moves the raw data from incommingdatafiles to batchdatafiles, creates Azure Batch and submits job to the Azure batch cluster. The job runs optimization code on batch nodes and it writes the result back to the SQL Database energyoptciqs.
 
 #### Azure Batch
 Azure Batch is the compute engine in this solution. Each time the data simulator writes data/message in the storage, a webjob reads the message, creates batch pool in Azure Batch and submits the optimization job for the simulated data. 
@@ -53,8 +55,6 @@ Azure SQL database is used to save the data and optimized results. You can use t
 ## **Visualization**
 
 The essential goal of this part is to get the optimization results and visualize it. Power BI can directly connect to an Azure SQL database as its data source, where the prediction results are stored.
-
-> Note:  1) In this step, the prerequisite is to download and install the free software [Power BI desktop](https://powerbi.microsoft.com/desktop). 2) We recommend you start this process 2-3 hours after you finish deploying the solution so that you have more data points to visualize.
 
 The PowerBI dashboard is deployed along with the solution and you can get the link to the dashboard in the after deployment instruction page. 
 
