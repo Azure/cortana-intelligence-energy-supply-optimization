@@ -309,7 +309,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 	    | SCM_COMMAND_IDLE_TIMEOUT        |5400 |
 	    | WEBJOBS_IDLE_TIMEOUT         |5400 |
         | DB_SVR             |energyopttemplate[UI][N].database.windows.net|
-	| DB_SVR_Name             |energyopttemplate[UI][N]|	
+	    | DB_SVR_Name             |energyopttemplate[UI][N]|	
         | DB_NAME           |energyopttemplatedb     |
         | DB_DSO         |Dso |
         | DB_MARKETPLACE         |MarketPlace |
