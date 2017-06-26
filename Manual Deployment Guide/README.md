@@ -103,7 +103,7 @@ An Azure Storage account is used to put the raw data file which are written by W
 
 -   Change the **Deployment Model** to **Resource manager**
 
--   Set the resource group to the resource group we created by selecting the radio button **Use existing**
+-   Set the resource group to the one we created, by selecting the radio button **Use existing**
 
 -   Location set to South Central US
 
