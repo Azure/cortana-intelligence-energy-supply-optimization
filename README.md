@@ -48,12 +48,18 @@ For more information on how to tailor Cortana Intelligence to your needs, [conne
 See the [Manual Deployment Guide](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide) folder for a full set of instructions on how to deploy the end-to-end pipeline, including a step-by-step walkthrough and files containing all the scripts that you’ll need to deploy resources. **For technical problems or questions about deploying this solution, please post in the issues tab of the repository.**
 
 
-## **Disclaimer**
+### **Disclaimer**
+
+©2017 Microsoft Corporation. All rights reserved. This information is provided "as-is" and may change without notice. Microsoft makes no warranties, express or implied, with respect to the information provided here. Third party data was used to generate the solution. You are responsible for respecting the rights of others, including procuring and complying with relevant licenses in order to create similar datasets.
+
 By deploying this pre-configured solution into your Azure account, you agree to abide by the terms and conditions set forth in the following end-user license agreements. 
+
 PYOMO 
 https://software.sandia.gov/trac/pyomo/wiki/Licensing
+
 CBC
 https://www.coin-or.org/Cbc
+
 Source code in this solution is owned by Microsoft or its licensors. By deploying this solution into your Azure account, you agree that the source code may not be downloaded and is used only within this solution on Azure.  
 
 
