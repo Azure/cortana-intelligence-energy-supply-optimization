@@ -174,6 +174,7 @@ In this step, we will create an Azure SQL Database to store “actual” demand 
 
 -   **Note**: This firewall rule is not recommended for production level systems but for this demo is acceptable. You will want to set this rule to the IP range of your secure system.
 
+- Click on overview on the left blade.
 
 - Create the second database by clicking **New Database** On the right panel top
     - Database name : Dso
@@ -193,15 +194,15 @@ energyopttemplate\[UI][N].database.windows.net,1433
 -	**THESE INSTRUCTIONS ARE FOR SSMS**
 	-	Click on the ***energyopttemplatedb*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file ***Manual Deployment Guide\SQL\EnergyOpt.sql*** to create the necessary table for storing the optimizer results.
+	-	Copy and execute the SQL script located in the package file *** [EnergyOpt.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/EnergyOpt.sql) *** to create the necessary table for storing the optimizer results.
 
   	-	Click on the ***Dso*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file ***Manual Deployment Guide\SQL\Dso.sql*** to create the necessary table which are used by data simulator to generate simulated data.
+	-	Copy and execute the SQL script located in the package file *** [Dso.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/Dso.sql) *** to create the necessary table which are used by data simulator to generate simulated data.
 
   	-	Click on the ***MarketPlace*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file ***Manual Deployment Guide\SQL\MarketPlace.sql***  to create the necessary table which are used by data simulator to generate simulated data.
+	-	Copy and execute the SQL script located in the package file *** [MarketPlace.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/MarketPlace.sql) ***  to create the necessary table which are used by data simulator to generate simulated data.
 
 **NOTE:** This firewall rule is not recommended for production level systems but for this demo is acceptable. You will want to set this rule to the IP range of your secure system.
 
@@ -358,7 +359,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Once you see the web job ***CreateBlobUploadData*** in the list, select it and click ***Run*** on the top of that tab.
 
-- Wait till the STATUS changes to Completed.
+- The job runs for approx. 3 minutes. Wait till the STATUS changes to Completed.
 
 ##### 2) Add installpkgs Web Job
 
@@ -380,7 +381,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Once you see the web job ***installpkgs*** in the list, select it and click ***Run*** on the top of that tab.
 
-- Wait till the STATUS changes to Completed.
+- The job runs for approx. 6 minutes. Wait till the STATUS changes to Completed.
 
 ##### 3) Add EnergyResourceDataSimulator Web Job
 - This web job simulates the data and stores it to incomingdatafiles container. It also writes a message in the incommingmessage queue. It uses tables in database Dso and MarketPlace to generate the rawdata
@@ -400,7 +401,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Once you see the web job ***EnergyResourceDataSimulator*** in the list, select it and click ***Run*** on the top of that tab.
 
-- Wait till the STATUS changes to Completed.
+- The job runs for approx. 10 minutes. Wait till the STATUS changes to Running. This jobs goes to sleep for 60 mins after every run. The status still remains running.  
 
 
 ##### 4) Add AzureBatchWebJob Web Job
@@ -421,7 +422,7 @@ In this step, we will create Azure Web App Server to run several Web Jobs includ
 
 - Once you see the web job ***AzureBatchWebJob*** in the list, it will start running and the status will change to Running.
 
-- Wait till the STATUS changes to Completed
+- Wait till the STATUS changes to Running. As this is a contineous job, it will run always.
 
 ### 7. Setup Power BI
 The essential goal of this part is to get the optimization results and visualize it. Power BI can directly connect to an Azure SQL database as its data source, where the optimization results are stored.
