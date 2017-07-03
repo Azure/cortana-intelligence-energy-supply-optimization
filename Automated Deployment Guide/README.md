@@ -46,6 +46,6 @@ This solution provides an Azure-based smart solution, leveraging external open-s
 
 6.  Finally, **Power BI** is used for results visualization.
 </Guide>
-#### Disclaimer
 
+#### Disclaimer
 ©2017 Microsoft Corporation. All rights reserved. This information is provided "as-is" and may change without notice. Microsoft makes no warranties, express or implied, with respect to the information provided here. Third party data was used to generate the solution. You are responsible for respecting the rights of others, including procuring and complying with relevant licenses in order to create similar datasets.
