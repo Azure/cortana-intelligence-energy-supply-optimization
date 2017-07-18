@@ -194,15 +194,15 @@ energyopttemplate\[UI][N].database.windows.net,1433
 -	**THESE INSTRUCTIONS ARE FOR SSMS**
 	-	Click on the ***energyopttemplatedb*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file *** [EnergyOpt.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/EnergyOpt.sql) *** to create the necessary table for storing the optimizer results.
+	-	Copy and execute the SQL script located in the package file *** [EnergyOpt.sql](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/blob/master/Manual%20Deployment%20Guide/SQL/EnergyOpt.sql) *** to create the necessary table for storing the optimizer results.
 
   	-	Click on the ***Dso*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file *** [Dso.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/Dso.sql) *** to create the necessary table which are used by data simulator to generate simulated data.
+	-	Copy and execute the SQL script located in the package file *** [Dso.sql](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/blob/master/Manual%20Deployment%20Guide/SQL/Dso.sql) *** to create the necessary table which are used by data simulator to generate simulated data.
 
   	-	Click on the ***MarketPlace*** that you created on the server.
 	-	Click ***New Query*** at the tool bar.
-	-	Copy and execute the SQL script located in the package file *** [MarketPlace.sql](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/SQL/MarketPlace.sql) ***  to create the necessary table which are used by data simulator to generate simulated data.
+	-	Copy and execute the SQL script located in the package file *** [MarketPlace.sql](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/blob/master/Manual%20Deployment%20Guide/SQL/MarketPlace.sql) ***  to create the necessary table which are used by data simulator to generate simulated data.
 
 **NOTE:** This firewall rule is not recommended for production level systems but for this demo is acceptable. You will want to set this rule to the IP range of your secure system.
 
