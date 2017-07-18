@@ -1,4 +1,4 @@
-# Energy Resource Optimization Solution
+# Energy Supply Optimization Solution
 
 This folder contains the deployment instructions for the Energy Resource Optimization solution in the Cortana Intelligence Gallery. To start a new solution deployment, visit the gallery page.
 
