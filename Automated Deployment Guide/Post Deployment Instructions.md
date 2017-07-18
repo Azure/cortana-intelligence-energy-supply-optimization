@@ -17,7 +17,7 @@ The architecture diagram shows various Azure services that are deployed by [Reso
 
 3.  Another **Web Job** monitors the storage queue and initiate an Azure Batch job once message in queue is available.
 
-4.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular resource type given the inputs received.
+4.  The **Azure Batch** service together with **Data Science Virtual Machines** is used to optimize the energy supply from a particular resource type given the inputs received. (Data Science Virtual Machines are selected in this example due to the convenience they bring to the developer, and alternatives exist for acheiving other goals such as system efficiency.)
 
 4.  **Azure SQL Database** is used to store the optimization results received from the **Azure Batch** service. These results are then consumed in the **Power BI** dashboard.
 
