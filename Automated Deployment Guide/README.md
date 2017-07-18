@@ -28,7 +28,7 @@ This solution provides an Azure-based smart solution, leveraging external open-s
 
 ## Solution Diagram
 
-![Solution Diagram](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
+![Solution Diagram](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
 
 
