@@ -1,11 +1,11 @@
 # Resource Optimization Solution
 
-This document is focusing on the post deployment instructions for the automated deployment through [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions). The source code of the solution as well as manual deployment instructions can be found [here](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide).
+This document is focusing on the post deployment instructions for the automated deployment through [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions). The source code of the solution as well as manual deployment instructions can be found [here](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/tree/master/Manual%20Deployment%20Guide).
 
 # Architecture
 The architecture diagram shows various Azure services that are deployed by [Resource Optimization Solution]() using [Cortana Intelligence Solutions](https://gallery.cortanaintelligence.com/solutions), and how they are connected to each other in the end to end solution.
 
-![Solution Diagram](https://github.com/Azure/cortana-intelligence-resource-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
+![Solution Diagram](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/blob/master/Manual%20Deployment%20Guide/Figures/resourceOptArchitecture.png)
 
 </Guide>
 
@@ -58,8 +58,8 @@ The essential goal of this part is to get the optimization results and visualize
 
 The PowerBI dashboard is deployed along with the solution and you can get the link to the dashboard in the after deployment instruction page. 
 
-If you want a desktop version of Power BI, follow the instruction provided [here](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide#7-setup-power-bi) to import the template and create/publish your own PowerBI Dashboard. 
+If you want a desktop version of Power BI, follow the instruction provided [here](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/tree/master/Manual%20Deployment%20Guide#7-setup-power-bi) to import the template and create/publish your own PowerBI Dashboard. 
 
 
 ## **Customization**
-You can reuse the source code in the [Manual Deployment Guide](https://github.com/Azure/cortana-intelligence-resource-optimization/tree/master/Manual%20Deployment%20Guide) to customize the solution for your data and business needs.
+You can reuse the source code in the [Manual Deployment Guide](https://github.com/Azure/cortana-intelligence-energy-supply-optimization/tree/master/Manual%20Deployment%20Guide) to customize the solution for your data and business needs.
