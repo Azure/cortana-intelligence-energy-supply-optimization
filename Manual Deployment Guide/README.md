@@ -498,3 +498,6 @@ The container also contains a congifuration file "modelConfig.txt" that provide 
 
 The webjob as defined by "AzureBatchWebJob.zip" is the central controller: It spins up the batch pool, sets up the nodes, submits jobs to the nodes, and writes the results to SQL database. After you have customized the optimization suite, make changes to appropriate lines in the main procedure "webjob_trigger.py", so that the code correctly copies the materials from "batchappfiles" to the nodes, properly prepares the nodes, and successfully submits the jobs.
 
+### Use another type of virtual machines as the pool nodes
+
+We used Data Science Virtual Machines for the nodes of the Azure Batch pool, and these virtual machines serve as powerful platform with abudant resources pre-installed for developers' convenience. In your case, you may want to use other types of virtual machines in your batch pool, so that the virtual machines are "light-wieghted" with less pre-installed software and run more efficiently. To this end, you will need deeper knowledge about [Azure Batch](https://azure.microsoft.com/en-us/services/batch/) and/or [Batch Shipyard](https://azure.github.io/batch-shipyard/) so as to create your own customized computation pool. You are encouraged to look into these offerings and decide what best works for your case.
